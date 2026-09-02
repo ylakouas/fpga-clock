@@ -44,7 +44,8 @@ stopwatch, countdown timer, RGB and audio indication, mode FSM.
 
 ## Status
 
-In progress.
+Toolchain verified on hardware. Blinky test confirms the 100 MHz
+oscillator and the full build-and-program flow. Core clock in progress.
 
 ## Notes
 
