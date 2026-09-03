@@ -47,3 +47,9 @@ set_property -dict {PACKAGE_PIN J2 IOSTANDARD LVCMOS33} [get_ports {btn[0]}]
 set_property -dict {PACKAGE_PIN J5 IOSTANDARD LVCMOS33} [get_ports {btn[1]}]
 set_property -dict {PACKAGE_PIN H2 IOSTANDARD LVCMOS33} [get_ports {btn[2]}]
 set_property -dict {PACKAGE_PIN J1 IOSTANDARD LVCMOS33} [get_ports {btn[3]}]
+
+# Mode indicator LEDs - positioned under HH and MM digit groups
+set_property -dict {PACKAGE_PIN A2 IOSTANDARD LVCMOS33} [get_ports {led_hour_a}]
+set_property -dict {PACKAGE_PIN B3 IOSTANDARD LVCMOS33} [get_ports {led_hour_b}]
+set_property -dict {PACKAGE_PIN C3 IOSTANDARD LVCMOS33} [get_ports {led_min_a}]
+set_property -dict {PACKAGE_PIN B2 IOSTANDARD LVCMOS33} [get_ports {led_min_b}]
