@@ -33,19 +33,25 @@ with every module verified in simulation before it goes near hardware.
 - Every module is verified with a Vivado testbench before integration.
 - All pushbutton inputs are synchronized and debounced.
 
-## Scope
-
-**Core:** clock enable generation, seconds/minutes/hours counters with
-correct rollover, multiplexed seven-segment display driver, pushbutton
-reset and time setting.
-
-**Stretch, after the core works on hardware:** 12/24-hour mode, alarm,
-stopwatch, countdown timer, RGB and audio indication, mode FSM.
-
 ## Status
 
-Toolchain verified on hardware. Blinky test confirms the 100 MHz
-oscillator and the full build-and-program flow. Core clock in progress.
+Complete. Core clock (timebase, seconds/minutes/hours counters,
+multiplexed display, pushbutton reset and time-setting) is built,
+simulated, and verified on hardware. Stretch: alarm with switch-set
+time, RGB and audio indication implemented and verified on hardware.
+
+## Scope
+
+**Core (complete):** clock enable generation, seconds/minutes/hours
+counters with correct rollover, multiplexed seven-segment display
+driver, pushbutton reset and time setting via a control FSM, mode
+indicator LEDs.
+
+**Stretch (complete):** alarm — hour/minute set via slide switches,
+armed/disarmed via pushbutton, RGB LED and PWM audio indication on
+match.
+
+**Not implemented:** 12/24-hour mode, stopwatch, countdown timer.
 
 ## Notes
 
