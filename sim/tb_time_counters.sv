@@ -9,11 +9,11 @@ module tb_time_counters;
 
     time_counters dut (
         .clk(clk), .rst(rst), .tick_1hz(tick_1hz),
+        .hour_inc(1'b0), .min_inc(1'b0), .sec_clear(1'b0),
         .sec_ones(sec_ones), .sec_tens(sec_tens),
         .min_ones(min_ones), .min_tens(min_tens),
         .hour_ones(hour_ones), .hour_tens(hour_tens)
     );
-
     initial clk = 0;
     always #5 clk = ~clk;
 
