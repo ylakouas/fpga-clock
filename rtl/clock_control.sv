@@ -1,20 +1,24 @@
 // clock_control.sv
 // small state machine: RUN -> SET_HOUR -> SET_MIN -> RUN, driven by
 // mode_pulse. reset_pulse always wins and snaps straight back to RUN.
+// set_hour/set_min tell the top module which LED to light, so setting
+// the time isn't done blind.
 
 module clock_control (
     input  logic clk,
     input  logic rst,
 
-    input  logic reset_pulse,   // btn0 edge - full clear
-    input  logic mode_pulse,    // btn1 edge - cycle states
-    input  logic inc_pulse,     // btn2 edge - increment selected field
+    input  logic reset_pulse,
+    input  logic mode_pulse,
+    input  logic inc_pulse,
 
-    output logic run_en,        // 1 while in RUN - gates the 1Hz tick
-    output logic hour_inc,      // inc_pulse routed here only in SET_HOUR
-    output logic min_inc,       // inc_pulse routed here only in SET_MIN
-    output logic full_clear,    // = reset_pulse, clears everything
-    output logic sec_clear      // pulses leaving SET_MIN -> RUN
+    output logic run_en,
+    output logic hour_inc,
+    output logic min_inc,
+    output logic full_clear,
+    output logic sec_clear,
+    output logic set_hour,      // 1 while in SET_HOUR - drives an LED
+    output logic set_min        // 1 while in SET_MIN - drives an LED
 );
 
     typedef enum logic [1:0] {
@@ -35,7 +39,7 @@ module clock_control (
     always_comb begin
         next_state = state;
         if (reset_pulse) begin
-            next_state = RUN;             // reset always wins
+            next_state = RUN;
         end else if (mode_pulse) begin
             case (state)
                 RUN:      next_state = SET_HOUR;
@@ -50,6 +54,8 @@ module clock_control (
     assign hour_inc    = inc_pulse && (state == SET_HOUR);
     assign min_inc      = inc_pulse && (state == SET_MIN);
     assign full_clear   = reset_pulse;
-    assign sec_clear     = mode_pulse && (state == SET_MIN);   // about to leave SET_MIN
+    assign sec_clear      = mode_pulse && (state == SET_MIN);
+    assign set_hour        = (state == SET_HOUR);
+    assign set_min           = (state == SET_MIN);
 
 endmodule
